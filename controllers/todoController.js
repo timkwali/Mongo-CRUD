@@ -1,12 +1,15 @@
 const Todo = require('../models/Todo')
 
 const addTodo = (req, res) => {
-    const { id, title, description, timestamp } = req.body
-    if(!id || !title || !description || !timestamp) {
-        console.log("Fill empty fields!")
+    const { _id, title, description, timestamp } = req.body
+    if(!_id || !title || !description || !timestamp) {
+        return res.status(403).json({
+            status: 403,
+            message: "Please fill empty fields"
+        })
     }
 
-    Todo.findOne({id: id})
+    Todo.findOne({_id: _id})
         .then((todo) => {
             if(todo) {
                 res.status(403).json({
@@ -14,7 +17,7 @@ const addTodo = (req, res) => {
                     message: "Todo already exists!"
                 })
             } else {
-                const newTodo = new Todo({id, title, description, timestamp})
+                const newTodo = new Todo({_id, title, description, timestamp})
                 newTodo
                     .save()
                     .then(res.status(200).json({
@@ -22,7 +25,7 @@ const addTodo = (req, res) => {
                         message: "Todo added successfully"
                     }))
                     .catch((err) => {
-                        res.status(500).json({
+                         res.status(500).json({
                             status: 500,
                             message: err.message,
                         })
@@ -47,10 +50,10 @@ const getAllTodo = (req, res) => {
 }
 
 const updateTodo = (req, res) => {
-    const id = req.params.id
+    const _id = req.params.id
     const newTodo = req.body
 
-    Todo.replaceOne({id: id}, newTodo)
+    Todo.replaceOne({_id: _id}, newTodo)
         .then((result) => res.status(200).json({
             status: 200,
             message: "Todo updated successfully"
@@ -64,9 +67,9 @@ const updateTodo = (req, res) => {
 }
 
 const deleteTodo = (req, res) => {
-    const id = req.params.id
+    const _id = req.params.id
 
-    Todo.deleteOne({id: id})
+    Todo.deleteOne({_id: _id})
         .then((result) => res.status(200).json({
             status: 200,
             message: "Todo deleted successfully"
