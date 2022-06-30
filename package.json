@@ -4,7 +4,9 @@
   "description": "Simple CRUD operations Node js app with MongoDb",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node index.js",
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
