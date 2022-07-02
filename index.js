@@ -3,7 +3,6 @@ const connectDb = require('./db/todoDb');
 require('dotenv').config() //allows us to use the environment variables in .env file
 const { PORT } = process.env
 const routes = require('./routes/todo')
-const { getAllTodo, addTodo, updateTodo, deleteTodo, todoHome } = require('./controllers/todoController')
 
 //Connect to db
 connectDb()
