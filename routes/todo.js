@@ -1,9 +1,11 @@
 const express = require('express')
-const { getAllTodo, addTodo, updateTodo, deleteTodo } = require('../controllers/todoController')
 const router = express.Router()
-// router.get('/todos', getAllTodo)
-// router.post('/todo', addTodo)
-// router.put('/todo/:id', updateTodo)
-// router.delete('/todo/:id', deleteTodo)
+const { getAllTodo, addTodo, updateTodo, deleteTodo, todoHome } = require('../controllers/todoController')
+
+router.get('/', todoHome)
+router.post('/todo', addTodo)
+router.get('/todos', getAllTodo)
+router.put('/todo/:id', updateTodo)
+router.delete('/todo/:id', deleteTodo)
 
 module.exports = router

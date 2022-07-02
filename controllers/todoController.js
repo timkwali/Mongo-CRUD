@@ -1,6 +1,14 @@
 const Todo = require('../models/Todo')
 
+const todoHome = (req, res) => {
+    return res.status(200).json({ 
+        status: 200,
+        message: "Welcome to Todo app!" 
+    }) 
+}
+
 const addTodo = (req, res) => {
+    console.log(`REQUEST BODY-----> ${req.body}`)
     const { _id, title, description, timestamp } = req.body
     if(!_id || !title || !description || !timestamp) {
         return res.status(403).json({
@@ -83,6 +91,7 @@ const deleteTodo = (req, res) => {
 }
 
 module.exports = {
+    todoHome,
     getAllTodo,
     addTodo,
     updateTodo,
